@@ -1,6 +1,6 @@
-async function saveEmail() {
-  const email = document.getElementById('emailInput').value;
-  document.cookie = `email=${email}; path=/`;
+async function saveName() {
+  const name = document.getElementById('nameInput').value;
+  document.cookie = `name=${name}; path=/`;
   location.reload();
 }
 
@@ -15,7 +15,7 @@ async function loadQuestions() {
   const data = await res.json();
   const uploads = await (await fetch('/uploads')).json();
 
-  const username = getCookie('email').split('@')[0];
+  const username = getCookie('name');
   const container = document.getElementById('questions');
   container.innerHTML = '';
 
@@ -34,7 +34,7 @@ async function loadQuestions() {
     if (match) {
       const thumbDiv = document.getElementById(`thumb-${q}`);
       thumbDiv.innerHTML = `
-        <img src="https://${'YOUR_STORAGE_ACCOUNT_NAME'}.blob.core.windows.net/uploads/${match}" width="100">
+        <img src="https://photohuntstorage.blob.core.windows.net/uploads/${match}" width="100">
         <button onclick="deletePhoto('${match}')">Delete</button>
       `;
     }
@@ -60,8 +60,8 @@ async function deletePhoto(blobName) {
   location.reload();
 }
 
-const email = getCookie('email');
-if (!email) {
+const name = getCookie('name');
+if (!name) {
   document.getElementById('emailPrompt').style.display = 'block';
 } else {
   document.getElementById('mainContent').style.display = 'block';
