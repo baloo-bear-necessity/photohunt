@@ -34,7 +34,7 @@ async function loadQuestions() {
     if (match) {
       const thumbDiv = document.getElementById(`thumb-${q}`);
       thumbDiv.innerHTML = `
-        <img src="https://YOUR_STORAGE_ACCOUNT_NAME.blob.core.windows.net/uploads/${match}" width="100">
+        <img src="https://photohuntstorage.blob.core.windows.net/uploads/${match}" width="100">
         <button onclick="deletePhoto('${match}')">Delete</button>
       `;
     }
