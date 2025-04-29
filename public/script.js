@@ -1,6 +1,7 @@
-async function saveName() {
-  const name = document.getElementById('nameInput').value;
-  document.cookie = `name=${name}; path=/`;
+function saveName() {
+  const name = document.getElementById('nameInput').value.trim();
+  if (!name) return alert("Please enter your name.");
+  document.cookie = `name=${encodeURIComponent(name)}; path=/; max-age=31536000`; // 1 year
   location.reload();
 }
 
@@ -8,6 +9,7 @@ function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
 }
 
 async function loadQuestions() {
@@ -60,10 +62,16 @@ async function deletePhoto(blobName) {
   location.reload();
 }
 
+function clearName() {
+  document.cookie = "name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  location.reload();
+}
+
 const name = getCookie('name');
 if (!name) {
   document.getElementById('emailPrompt').style.display = 'block';
 } else {
   document.getElementById('mainContent').style.display = 'block';
+  document.getElementById('greeting').innerText = `Welcome, ${decodeURIComponent(name)}!`;
   loadQuestions();
 }
