@@ -11,7 +11,12 @@
     <input type="text" id="nameInput" placeholder="Enter your name">
     <button onclick="saveName()">Save Name</button>
   </div>
+
   <div id="mainContent" style="display:none;">
+    <div id="userInfo" class="center" style="margin-bottom: 20px;">
+      <p id="greeting"></p>
+      <a href="#" onclick="clearName()">Not you? Change name</a>
+    </div>
     <h1>Upload your photos</h1>
     <div id="questions"></div>
   </div>
